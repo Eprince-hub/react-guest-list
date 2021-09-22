@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import Guests from './Guests';
 
-export default function UserInput(props) {
+export default function UserInput() {
   // setting state variables
-  console.log('The property is: ' + props);
   // user input states
   const [userData, setUserData] = useState({ firstName: '', lastName: '' });
 
   const [disableButton, setDisableButton] = useState(true);
 
+  const [guestLists, setGuestLists] = useState([]);
+
+  // Function that handles For Submission
   function handleSubmit(event) {
-    console.log('submitted' + userData);
     console.log('firstName: ' + userData.firstName);
     console.log('lastName: ' + userData.lastName);
     event.preventDefault();
@@ -18,6 +20,7 @@ export default function UserInput(props) {
     setDisableButton(true);
   }
 
+  // Function that handles changes on user Inputs
   function handleUserInputChange(event) {
     setUserData({
       ...userData,
@@ -27,7 +30,12 @@ export default function UserInput(props) {
     setDisableButton(false);
   }
 
-  console.log(userData);
+  // Function that concats the user information to the user lists array
+  function handleGuestUpdate() {
+    setGuestLists(guestLists.concat(userData));
+  }
+
+  console.log(guestLists);
 
   return (
     <div>
@@ -37,7 +45,6 @@ export default function UserInput(props) {
         <label>
           First Name:
           <input
-            type="text"
             name="firstName"
             required
             value={userData.firstName}
@@ -48,15 +55,28 @@ export default function UserInput(props) {
         <label>
           Last Name:
           <input
-            type="text"
             name="lastName"
             required
             value={userData.lastName}
             onChange={handleUserInputChange}
           />
         </label>
-        <input type="submit" value="Submit" disabled={disableButton} />
+        <input
+          onClick={handleGuestUpdate}
+          type="submit"
+          value="Submit"
+          disabled={disableButton}
+        />
       </form>
+
+      {/* The Guest Component */}
+
+      <Guests
+        user={{
+          firstName: [userData.firstName],
+          lastName: [userData.lastName],
+        }}
+      />
     </div>
   );
 }
