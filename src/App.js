@@ -1,6 +1,7 @@
 import './App.css';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import FetchGuests from './components/FetchGuests';
 import GuestBookHomePage from './components/GuestBookHomePage';
 
 const appStyle = css`
@@ -13,9 +14,13 @@ const appStyle = css`
 function App() {
   return (
     <div css={appStyle}>
-      <h1>React Guest List</h1>
-      <h2>Register As a Guest</h2>
+      <h1>Guest List</h1>
+      <h3>Register As A Guest</h3>
       <GuestBookHomePage />
+
+      {/* <h1>Checking the fectched guest component</h1> */}
+
+      {/* <FetchGuests /> */}
     </div>
   );
 }

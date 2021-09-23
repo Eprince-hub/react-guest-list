@@ -1,7 +1,67 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { useState } from 'react';
 import Guests from './Guests';
 
+const guestStyle = css`
+  width: 80%auto;
+  min-height: 100vh;
+
+  .todoList {
+    background-color: white;
+    margin: auto;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #efefef;
+    box-shadow:
+     /* The top layer shadow */ 0 1px 1px rgba(0, 0, 0, 0.15),
+      /* The second layer */ 0 10px 0 -5px #eee,
+      /* The second layer shadow */ 0 10px 1px -4px rgba(0, 0, 0, 0.15),
+      /* The third layer */ 0 20px 0 -10px #eee,
+      /* The third layer shadow */ 0 20px 1px -9px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+
+    p {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 30px 20px 0;
+      width: 70%;
+      border-bottom: 1px solid #cecece;
+      font-family: Roboto, sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      color: #333333;
+    }
+
+    + button {
+      background: purple;
+      color: white;
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      -o-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+
+      :hover {
+        background: lightcyan;
+        color: black;
+        -o-transition: all 0.4s ease-in-out;
+        -webkit-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+      }
+    }
+  }
+`;
+
 export default function UserInput() {
+  let uniqueId = 0;
   // setting state variables
   // user input states
   const [userData, setUserData] = useState({ firstName: '', lastName: '' });
@@ -35,12 +95,18 @@ export default function UserInput() {
     setGuestLists(guestLists.concat(userData));
   }
 
+  // function handleClearGuestList() {
+  //   setInterval(() => {
+  //     guestLists.firstName.pop();
+  //     guestLists.lastName.pop();
+  //   }, 1000);
+  //   console.log('I am being clicked!');
+  // }
+
   console.log(guestLists);
 
   return (
-    <div>
-      <h1>Hello from the GuestInput</h1>
-
+    <div css={guestStyle}>
       <form onSubmit={handleSubmit}>
         <label>
           First Name:
@@ -69,14 +135,44 @@ export default function UserInput() {
         />
       </form>
 
+      <div>
+        <h2>Guests</h2>
+        {guestLists.map((guest) => {
+          console.log(guest.firstName);
+          console.log(guest.lastName);
+          uniqueId++;
+          return (
+            <div key={uniqueId} className="todoList">
+              <p>First Name: {guest.firstName}</p>
+              <p>Last Name: {guest.lastName}</p>
+            </div>
+          );
+        })}
+        <button>Clear Guest List</button>
+      </div>
+
       {/* The Guest Component */}
 
-      <Guests
+      {/* <Guests
         user={{
           firstName: [userData.firstName],
           lastName: [userData.lastName],
         }}
-      />
+      /> */}
     </div>
   );
 }
+
+/*
+
+function handleClearGuestList() {
+    while (guestLists.length > 0) {
+      setInterval(() => {
+        firstName.pop();
+        lastName.pop();
+      }, 1000);
+    }
+    console.log('I am being clicked!');
+  }
+
+*/
