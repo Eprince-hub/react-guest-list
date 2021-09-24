@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Guests from './Guests';
 
 const guestStyle = css`
@@ -58,7 +58,51 @@ const guestStyle = css`
       }
     }
   }
+
+  form {
+    width: 100%;
+
+    label {
+      display: block;
+      font-size: 1.5rem;
+      height: 4rem;
+
+      input {
+        width: 60%;
+        height: 2.5rem;
+        border: none;
+        border-radius: 10px;
+        margin: 0.5rem 0.5rem 0rem 0.8rem;
+        padding: 0 0.5rem;
+        font-size: 1.2rem;
+      }
+    }
+
+    .submit {
+      background: purple;
+      color: white;
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      -o-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+
+      :hover {
+        background: lightcyan;
+        color: black;
+        -o-transition: all 0.4s ease-in-out;
+        -webkit-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+      }
+    }
+  }
 `;
+
+const baseUrl = 'http://localhost:5000';
 
 export default function UserInput() {
   let uniqueId = 0;
@@ -70,6 +114,28 @@ export default function UserInput() {
 
   const [guestLists, setGuestLists] = useState([]);
 
+  // function that adds a user
+  /*
+  async function addUsers() {
+    const response = await fetch(`${baseUrl}/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: guestLists.firstName,
+        lastName: guestLists.lastName,
+      }),
+    });
+    const createdGuest = await response.json();
+
+    console.log('This should be the created guests' + createdGuest);
+  }
+
+  useEffect(() => {
+    addUsers();
+  }, []);
+ */
   // Function that handles For Submission
   function handleSubmit(event) {
     console.log('firstName: ' + userData.firstName);
@@ -90,10 +156,12 @@ export default function UserInput() {
     setDisableButton(false);
   }
 
-  // Function that concats the user information to the user lists array
+  // Function that concat the user information to the user lists array
   function handleGuestUpdate() {
     setGuestLists(guestLists.concat(userData));
   }
+
+  // console.log('Another new test starts here');
 
   // function handleClearGuestList() {
   //   setInterval(() => {
@@ -132,6 +200,7 @@ export default function UserInput() {
           type="submit"
           value="Submit"
           disabled={disableButton}
+          className={!disableButton ? 'submit' : ''}
         />
       </form>
 
@@ -176,3 +245,5 @@ function handleClearGuestList() {
   }
 
 */
+
+// https://react-guests-lists.herokuapp.com/
