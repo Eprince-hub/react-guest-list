@@ -58,12 +58,12 @@ export default function PostingGuests(props) {
   const [disableButton, setDisableButton] = useState(true); // controls the life of the submit button
   const [userData, setUserData] = useState({ firstName: '', lastName: '' }); // User Data collection as an object
   const [guestLists, setGuestLists] = useState([]); // the lists of all the guests including the newly added ones
-  // const [guests, setGuests] = useState();
+  const [guestsAttendance, setGuestsAttendance] = useState(0); // counter for the attending guests
 
   const baseUrl = 'http://localhost:5000';
 
   // This function fetches the Guests information from the server
-  // problem, anytime i add a dependency then it goes into an infinite loop: Needs a FIX!
+  // problem!!!, anytime i add a dependency then it goes into an infinite loop: Needs a FIX!
   useEffect(() => {
     function fetchGuestsInfo() {
       fetch(`${baseUrl}/`)
@@ -110,6 +110,52 @@ export default function PostingGuests(props) {
     setGuestLists(newGuestInfo);
   }
 
+  // this function will send an update to the server implying if the guest would  be attending.
+  // takes the updated guest list and make a patch request.
+
+  async function updateGuestAttendingStatus(guestList) {
+    const response = await fetch(`${baseUrl}/${guestList.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ attending: guestList.attending }),
+    });
+    const updatedGuest = await response.json();
+    console.log(updatedGuest);
+  }
+
+  async function deleteGuestFromList(guestList) {
+    const response = await fetch(`${baseUrl}/${guestList.id}`, {
+      method: 'DELETE',
+    });
+    const deletedGuest = await response.json();
+    console.log(deletedGuest);
+    // filter the deleted guest from the array of guests
+    const guestToDelete = guestLists.filter(
+      (guest) => guest.id !== deletedGuest.id,
+    );
+    setGuestLists(guestToDelete);
+  }
+
+  // Handlers Starts Here!!!
+
+  // this function would handle the attending status of the guests
+  // Will take two parameters, the id and the attending status
+  function handleAttendance(id, attendance) {
+    const newGuestsLists = [...guestLists];
+    const attendingGuest = newGuestsLists.find((guest) => guest.id === id);
+    attendingGuest.attending = attendance;
+
+    // updating the Guest Lists with the new attendance value
+    // setGuestLists(attendingGuest);
+    setGuestLists(newGuestsLists);
+    // call the patching function that will trigger the server update here!
+    // and pass the needed argument
+
+    updateGuestAttendingStatus(attendingGuest);
+  }
+
   // this function handles the user input changes as the user interacts with the form.
   function handleUserInputChange(event) {
     setUserData({
@@ -120,10 +166,6 @@ export default function PostingGuests(props) {
     setDisableButton(false);
   }
 
-  // Troubleshooting
-  console.log('User Datas are as follows: ');
-  console.log(userData);
-
   // Function that concat the user information to the user lists array
   function handleGuestUpdate() {
     setGuestLists(guestLists.concat(userData));
@@ -131,10 +173,6 @@ export default function PostingGuests(props) {
     setUserData({ firstName: '', lastName: '' });
     setDisableButton(true);
   }
-
-  // Troubleshooting
-  console.log('The guests lists are as folows');
-  console.log(guestLists);
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -148,6 +186,7 @@ export default function PostingGuests(props) {
             lastName="lastName"
             lastNameValue={userData.lastName}
             handleUserInput={handleUserInputChange}
+            description="Register As Guest"
           />
           <SubmitButton
             buttonStyle={buttonStyle}
@@ -160,6 +199,7 @@ export default function PostingGuests(props) {
           >
             Submit Name
           </SubmitButton>
+          <p>{guestsAttendance} guests are attending this party</p>
         </div>
 
         <div className="guestDisplay">
@@ -170,12 +210,30 @@ export default function PostingGuests(props) {
               <div key={guest.id} className="cssClassName">
                 <p>
                   <label>
-                    <input type="checkbox" className="checkBox" />
+                    <input
+                      /* id="attending" */
+                      checked={guest.attending}
+                      type="checkbox"
+                      className="checkBox"
+                      onChange={(event) => {
+                        handleAttendance(guest.id, event.currentTarget.checked);
+                        guest.attending
+                          ? setGuestsAttendance(guestsAttendance + 1)
+                          : setGuestsAttendance(guestsAttendance - 1);
+                      }}
+                    />
                   </label>
                   {`Name: ${guest.firstName}
                   ${guest.lastName} `}
-                  <span>Delete</span>
-                  <span>Edit</span>
+                  <button
+                    onClick={() => {
+                      alert('Are You Sure You Want To Delete This Guest?');
+                      deleteGuestFromList(guest);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button>Edit</button>
                 </p>
               </div>
             );

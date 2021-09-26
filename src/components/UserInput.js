@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 export default function UserInput(props) {
   return (
     <div>
+      <h2>{props.description}</h2>
       {/* Form that collects user input */}
       <div>
         {/* Input that collects the first name */}
