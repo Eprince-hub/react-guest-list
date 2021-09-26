@@ -5,7 +5,7 @@ import Guests from './Guests';
 
 const guestStyle = css`
   width: 80%auto;
-  min-height: 100vh;
+  /*  min-height: 100vh; */
 
   .todoList {
     background-color: white;
@@ -114,32 +114,31 @@ export default function UserInput() {
 
   const [guestLists, setGuestLists] = useState([]);
 
-  // function that adds a user
-  /*
-  async function addUsers() {
+  // ###########################################
+
+  /* const [guestFirstName, setGuestFirstName] = useState([]);
+  const [guestLastName, setGuestLastName] = useState([]);
+
+  async function postGuests() {
     const response = await fetch(`${baseUrl}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstName: guestLists.firstName,
-        lastName: guestLists.lastName,
+        firstName: guestFirstName,
+        lastName: guestLastName,
       }),
     });
     const createdGuest = await response.json();
+    console.log('Created Guests are');
+    console.log(createdGuest);
+  } */
 
-    console.log('This should be the created guests' + createdGuest);
-  }
-
-  useEffect(() => {
-    addUsers();
-  }, []);
- */
   // Function that handles For Submission
   function handleSubmit(event) {
-    console.log('firstName: ' + userData.firstName);
-    console.log('lastName: ' + userData.lastName);
+    /*  console.log('firstName: ' + userData.firstName);
+    console.log('lastName: ' + userData.lastName); */
     event.preventDefault();
 
     setUserData({ firstName: '', lastName: '' });
@@ -171,7 +170,7 @@ export default function UserInput() {
   //   console.log('I am being clicked!');
   // }
 
-  console.log(guestLists);
+  /* console.log(guestLists); */
 
   return (
     <div css={guestStyle}>
@@ -207,8 +206,11 @@ export default function UserInput() {
       <div>
         <h2>Guests</h2>
         {guestLists.map((guest) => {
-          console.log(guest.firstName);
-          console.log(guest.lastName);
+          /* console.log(guest.firstName);
+          console.log(guest.lastName); */
+          /* setGuestFirstName(guest.firstName);
+          setGuestLastName(guest.lastName); */
+
           uniqueId++;
           return (
             <div key={uniqueId} className="todoList">
