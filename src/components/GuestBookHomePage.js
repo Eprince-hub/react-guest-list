@@ -4,11 +4,12 @@ import PostingGuests from './PostingGuests';
 
 const guestStyle = css`
   width: 100%;
-  /*  min-height: 100vh; */
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-around;
 
   div.guestDisplay {
-    margin: 1.5rem auto;
-    width: 60vw;
+    width: 48vw;
     border-radius: 10px;
     -o-transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
@@ -24,17 +25,14 @@ const guestStyle = css`
     div {
       background-color: white;
       margin: auto;
-      width: 80%;
+      width: 95%;
       display: flex;
       flex-direction: column;
       align-items: center;
       border: 1px solid #efefef;
-      box-shadow:
-     /* The top layer shadow */ 0 1px 1px rgba(0, 0, 0, 0.15),
-        /* The second layer */ 0 10px 0 -5px #eee,
-        /* The second layer shadow */ 0 10px 1px -4px rgba(0, 0, 0, 0.15),
-        /* The third layer */ 0 20px 0 -10px #eee,
-        /* The third layer shadow */ 0 20px 1px -9px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 10px 0 -5px #eee,
+        0 10px 1px -4px rgba(0, 0, 0, 0.15), 0 20px 0 -10px #eee,
+        0 20px 1px -9px rgba(0, 0, 0, 0.15);
       padding: 30px;
       border-bottom: 2px solid #cecece;
       border-radius: 15px;
@@ -50,6 +48,9 @@ const guestStyle = css`
         font-weight: 500;
         font-size: 1.3rem;
         color: #333333;
+        -o-transition: all 0.4s ease-in-out;
+        -webkit-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
 
         span {
           font-size: 1.1rem;
@@ -58,53 +59,81 @@ const guestStyle = css`
           position: absolute;
           right: 1rem;
           border-radius: 10px;
+          padding: 0.2rem 0.8rem;
+          cursor: pointer;
 
           + span {
-            right: 4rem;
+            right: 6rem;
+            margin-right: 1rem;
+          }
+        }
+
+        label {
+          width: 40px;
+          height: 40px;
+          display: inline-flex;
+          position: relative;
+          left: -5rem;
+          padding: 0;
+          margin: 0;
+
+          .checkBox {
+            background: red;
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            left: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            border: 1px solid #34495e;
+            border-radius: 4px;
+            outline: none;
+            background-color: #41b883;
+            -o-transition: all 0.4s ease-in-out;
+            -webkit-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 3px 5px 4px 2px grey;
+
+            :checked {
+              border: 1px solid #41b883;
+              background-color: #34495e;
+            }
+            :active {
+              border: 2px solid #34495e;
+            }
           }
         }
       }
     }
   }
 
-  .guestDisplayCard {
-    /* + button {
-      background: purple;
-      color: white;
-      padding: 1rem 1.5rem;
-      margin-top: 1rem;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      -o-transition: all 0.4s ease-in-out;
-      -webkit-transition: all 0.4s ease-in-out;
-      transition: all 0.4s ease-in-out;
+  .guestInputDisplay {
+    width: 40%;
+    border-radius: 10px;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 3px 5px 4px 2px grey;
+    padding: 5rem 0 0 0;
 
-      :hover {
-        background: lightcyan;
-        color: black;
-        -o-transition: all 0.4s ease-in-out;
-        -webkit-transition: all 0.4s ease-in-out;
-        transition: all 0.4s ease-in-out;
+    label {
+      display: inline-block;
+      font-size: 1.5rem;
+      height: 4rem;
+      font-weight: bold;
+
+      input {
+        width: 20vw;
+        height: 2.7rem;
+        border: none;
+        border-radius: 10px;
+        margin: 0.5rem 0.5rem 0rem 0.8rem;
+        padding: 0 0.5rem;
+        font-size: 1.2rem;
+        box-shadow: 3px 5px 4px 2px grey;
       }
-    } */
-  }
-
-  label {
-    display: block;
-    font-size: 1.5rem;
-    height: 4rem;
-
-    input {
-      width: 60%;
-      height: 2.5rem;
-      border: none;
-      border-radius: 10px;
-      margin: 0.5rem 0.5rem 0rem 0.8rem;
-      padding: 0 0.5rem;
-      font-size: 1.2rem;
-      box-shadow: 3px 5px 4px 2px grey;
     }
   }
 `;

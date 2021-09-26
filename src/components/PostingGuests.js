@@ -141,24 +141,26 @@ export default function PostingGuests(props) {
   } else {
     return (
       <div css={props.cssStyling}>
-        <UserInput
-          firstName="firstName"
-          firstNameValue={userData.firstName}
-          lastName="lastName"
-          lastNameValue={userData.lastName}
-          handleUserInput={handleUserInputChange}
-        />
-        <SubmitButton
-          buttonStyle={buttonStyle}
-          buttonClassName={!disableButton ? 'submit' : 'idleButton'}
-          displayStatus={disableButton}
-          handleSubmits={() => {
-            handleGuestUpdate();
-            postGuestsInfo();
-          }}
-        >
-          Submit Name
-        </SubmitButton>
+        <div className="guestInputDisplay">
+          <UserInput
+            firstName="firstName"
+            firstNameValue={userData.firstName}
+            lastName="lastName"
+            lastNameValue={userData.lastName}
+            handleUserInput={handleUserInputChange}
+          />
+          <SubmitButton
+            buttonStyle={buttonStyle}
+            buttonClassName={!disableButton ? 'submit' : 'idleButton'}
+            displayStatus={disableButton}
+            handleSubmits={() => {
+              handleGuestUpdate();
+              postGuestsInfo();
+            }}
+          >
+            Submit Name
+          </SubmitButton>
+        </div>
 
         <div className="guestDisplay">
           <h2>All Guests</h2>
@@ -167,10 +169,13 @@ export default function PostingGuests(props) {
             return (
               <div key={guest.id} className="cssClassName">
                 <p>
+                  <label>
+                    <input type="checkbox" className="checkBox" />
+                  </label>
                   {`Name: ${guest.firstName}
                   ${guest.lastName} `}
-                  <span>Edit</span>
                   <span>Delete</span>
+                  <span>Edit</span>
                 </p>
               </div>
             );
