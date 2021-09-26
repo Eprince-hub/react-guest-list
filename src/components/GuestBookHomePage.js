@@ -19,7 +19,10 @@ const guestStyle = css`
 
     h2 {
       font-size: 1.7rem;
-      margin-bottom: 1rem;
+      margin: 4.5rem 0 1rem 0;
+      display: inline-block;
+      border-bottom: 5px solid #34495e;
+      padding-bottom: 0.5rem;
     }
 
     div {
@@ -52,19 +55,22 @@ const guestStyle = css`
         -webkit-transition: all 0.4s ease-in-out;
         transition: all 0.4s ease-in-out;
 
-        span {
+        button {
           font-size: 1.1rem;
           font-weight: bold;
-          background: red;
           position: absolute;
           right: 1rem;
           border-radius: 10px;
           padding: 0.2rem 0.8rem;
           cursor: pointer;
+          border: none;
+          background: red;
+          color: white;
 
-          + span {
+          + button {
             right: 6rem;
             margin-right: 1rem;
+            background: #34495e;
           }
         }
 
@@ -76,6 +82,7 @@ const guestStyle = css`
           left: -5rem;
           padding: 0;
           margin: 0;
+          cursor: pointer;
 
           .checkBox {
             background: red;
@@ -95,6 +102,7 @@ const guestStyle = css`
             -webkit-transition: all 0.4s ease-in-out;
             transition: all 0.4s ease-in-out;
             box-shadow: 3px 5px 4px 2px grey;
+            cursor: pointer;
 
             :checked {
               border: 1px solid #41b883;
@@ -123,6 +131,7 @@ const guestStyle = css`
       font-size: 1.5rem;
       height: 4rem;
       font-weight: bold;
+      margin-bottom: 2rem;
 
       input {
         width: 20vw;
@@ -133,7 +142,27 @@ const guestStyle = css`
         padding: 0 0.5rem;
         font-size: 1.2rem;
         box-shadow: 3px 5px 4px 2px grey;
+        display: flex;
+        flex-direction: row;
       }
+    }
+
+    h2 {
+      margin: 0rem 0 3rem 0;
+      padding-bottom: 0.5rem;
+      display: inline-block;
+      border-bottom: 5px solid #34495e;
+    }
+
+    p {
+      width: 70%;
+      margin: 3rem auto;
+      font-size: 1.3rem;
+      font-weight: bolder;
+      padding: 1.5rem 1rem;
+      border-radius: 10px;
+      color: #34495e;
+      box-shadow: 3px 5px 4px 2px grey;
     }
   }
 `;
