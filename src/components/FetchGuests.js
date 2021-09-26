@@ -1,5 +1,43 @@
 import { useEffect, useState } from 'react';
 
+export default function FetchGuests() {
+  const [fetchedGuests, setFetchedGuests] = useState([]);
+
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const baseUrl = 'http://localhost:5000';
+
+  useEffect(() => {
+    fetch(`${baseUrl}/`)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setFetchedGuests(result);
+
+          console.log('checking results');
+          console.log(result);
+        },
+
+        (err) => {
+          setIsLoaded(true);
+          setErrorMessage(err);
+        },
+      );
+  }, []);
+
+  console.log('checking fetched guests');
+  console.log(fetchedGuests);
+
+  return (
+    <div>
+      <h1>Hello from fetching guest component</h1>
+      <p>I am getting information from the fetching guest component</p>
+    </div>
+  );
+}
+
 /*
 export default function FetchGuests() {
   const [errorMessage, setErrorMessage] = useState(null);
