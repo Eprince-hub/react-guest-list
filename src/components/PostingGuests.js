@@ -52,6 +52,19 @@ const buttonStyle = css`
   }
 `;
 
+const loadingDivStyle = css`
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 15rem;
+  left: 50%;
+  font-size: 1.2rem;
+  font-weight: bolder;
+`;
+
 export default function PostingGuests(props) {
   // const [errorMessage, setErrorMessage] = useState(null); // controls for the error message in case there is one
   const [isLoaded, setIsLoaded] = useState(false); // Takes care of the Loading that would show on any delay
@@ -60,7 +73,9 @@ export default function PostingGuests(props) {
   const [guestLists, setGuestLists] = useState([]); // the lists of all the guests including the newly added ones
   const [guestsAttendance, setGuestsAttendance] = useState(0); // counter for the attending guests
 
-  const baseUrl = 'http://localhost:5000';
+  // const baseUrl = 'http://localhost:5000';
+
+  const baseUrl = 'https://react-guestbook-api.herokuapp.com';
 
   // This function fetches the Guests information from the server
   // problem!!!, anytime i add a dependency then it goes into an infinite loop: Needs a FIX!
@@ -175,7 +190,7 @@ export default function PostingGuests(props) {
   }
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div css={loadingDivStyle}>Loading...</div>;
   } else {
     return (
       <div css={props.cssStyling}>
@@ -207,7 +222,7 @@ export default function PostingGuests(props) {
 
           {guestLists.map((guest) => {
             return (
-              <div key={guest.id} className="cssClassName">
+              <div key={guest.id} /* className="cssClassName" */>
                 <p>
                   <label>
                     <input
@@ -234,6 +249,12 @@ export default function PostingGuests(props) {
                     Delete
                   </button>
                   <button>Edit</button>
+                </p>
+                <p
+                  className="guestAttendingPara"
+                  style={{ display: guest.attending ? 'block' : 'none' }}
+                >
+                  Attending
                 </p>
               </div>
             );
