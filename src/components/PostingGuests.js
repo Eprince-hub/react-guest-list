@@ -245,7 +245,7 @@ export default function PostingGuests(props) {
                     disabled={guest.attending ? true : false}
                     style={{
                       textDecoration: guest.attending
-                        ? 'line-through black 5px'
+                        ? 'line-through #34495E 5px'
                         : 'initial',
                     }}
                     onClick={() => {
