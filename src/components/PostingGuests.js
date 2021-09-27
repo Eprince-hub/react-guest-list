@@ -239,7 +239,7 @@ export default function PostingGuests(props) {
                       }}
                     />
                   </label>
-                  {`Name: ${guest.firstName}
+                  {`${guest.firstName}
                   ${guest.lastName} `}
                   <button
                     disabled={guest.attending ? true : false}
