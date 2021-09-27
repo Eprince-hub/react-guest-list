@@ -86,11 +86,12 @@ export default function PostingGuests(props) {
         .then(
           (result) => {
             setIsLoaded(true);
-            setGuestLists(guestLists.concat(result));
+            // setGuestLists(guestLists.concat(result));
+            setGuestLists(result);
 
             // troubleShooting
-            console.log('checking results');
-            console.log(result);
+            // console.log('checking results');
+            // console.log(result);
           },
 
           (err) => {
@@ -241,6 +242,12 @@ export default function PostingGuests(props) {
                   {`Name: ${guest.firstName}
                   ${guest.lastName} `}
                   <button
+                    disabled={guest.attending ? true : false}
+                    style={{
+                      textDecoration: guest.attending
+                        ? 'line-through black 5px'
+                        : 'initial',
+                    }}
                     onClick={() => {
                       alert('Are You Sure You Want To Delete This Guest?');
                       deleteGuestFromList(guest);
