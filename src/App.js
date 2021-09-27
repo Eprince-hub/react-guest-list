@@ -2,11 +2,10 @@ import './App.css';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import GuestBookHomePage from './components/GuestBookHomePage';
-import backgroundImage from './components/images/tile_background.png';
 
 const appStyle = css`
   background-color: black;
-  background-image: url(${backgroundImage});
+  background-image: url(${process.env.PUBLIC_URL}/images/tile_background.png);
   backdrop-filter: invert(70%);
   width: 100vw;
   min-height: 100vh;

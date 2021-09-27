@@ -115,6 +115,19 @@ const guestStyle = css`
         }
       }
     }
+    /* .cssClassName {
+      background: black;
+    } */
+
+    .guestAttendingPara {
+      background: #34495e;
+      width: 24%;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      border-radius: 10px;
+      padding-bottom: 0.5rem;
+    }
   }
 
   .guestInputDisplay {
