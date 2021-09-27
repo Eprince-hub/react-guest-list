@@ -127,6 +127,10 @@ const guestStyle = css`
       color: white;
       border-radius: 10px;
       padding-bottom: 0.5rem;
+      margin-bottom: -1rem;
+      -o-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
     }
   }
 
